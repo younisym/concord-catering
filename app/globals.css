@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand palette — Corporate Blue, Concord Red, White, Light Gray (from the logo) */
+  --color-navy: #0e2a5e;
+  --color-navy-2: #163b7d;
+  --color-navy-3: #2251a3;
+  --color-red: #ed1b24;
+  --color-red-dark: #c8141c;
+  --color-white: #ffffff;
+  --color-offwhite: #fafbfc;
+  --color-gray-light: #f2f4f7;
+  --color-gray: #667085;
+  --color-gray-dark: #3f4654;
+  --color-line: #e6e9ee;
+
+  --background: var(--color-white);
+  --foreground: var(--color-navy);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-navy: var(--color-navy);
+  --color-navy-2: var(--color-navy-2);
+  --color-navy-3: var(--color-navy-3);
+  --color-red: var(--color-red);
+  --color-red-dark: var(--color-red-dark);
+  --color-offwhite: var(--color-offwhite);
+  --color-gray-light: var(--color-gray-light);
+  --color-gray: var(--color-gray);
+  --color-gray-dark: var(--color-gray-dark);
+  --color-line: var(--color-line);
+
+  --font-sans: var(--font-jakarta);
+
+  --animate-marquee: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* thin, engineered hairline rule used across section headings */
+.hairline {
+  height: 1px;
+  background: linear-gradient(to right, var(--color-red), transparent 55%);
+}
+
+.kicker {
+  letter-spacing: 0.22em;
+}
+
+/* very subtle background gradients — used sparingly per the brand's
+   editorial, low-noise design language */
+.bg-fade-gray {
+  background: linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-light) 100%);
+}
+
+.bg-fade-navy {
+  background: linear-gradient(155deg, var(--color-navy) 0%, var(--color-navy-2) 100%);
+}
+
+.bg-fade-navy-deep {
+  background: linear-gradient(180deg, var(--color-navy-2) 0%, var(--color-navy) 65%);
+}
+
+::selection {
+  background: var(--color-red);
+  color: var(--color-white);
+}
