@@ -4,11 +4,16 @@ export const siteConfig = {
   name: "Concord for Catering",
   tagline: "Everywhere. Every Time.",
   founded: 2011,
-  phones: ["+20 2 XXXX XXXX", "+20 1XX XXX XXXX"],
-  email: "info@concordcatering.com",
+  domain: "https://www.concord4catering.com",
+  // Primary contact — used everywhere across the site (header, footer,
+  // contact page, CTAs, structured data). Update here and it propagates.
+  phone: "+20 106 998 5399",
+  phoneHref: "tel:+201069985399",
+  email: "admin@concord4catering.com",
+  emailHref: "mailto:admin@concord4catering.com",
   hours: {
-    days: "Sunday – Thursday",
-    time: "9:00 AM – 5:00 PM",
+    primary: "24/7 Operations",
+    secondary: "Available 365 days a year",
   },
   locations: [
     {
@@ -29,6 +34,76 @@ export const siteConfig = {
       established: 2022,
       blurb: "Extending airline catering services across the Red Sea region.",
     },
+  ],
+};
+
+// Branch contact points — each mapped to the airport it serves, with a
+// dedicated branch email. Used by the "Our Branches" section on the
+// Contact page.
+export const branches = [
+  {
+    name: "Cairo Branch",
+    code: "CAI",
+    airport: "Cairo International Airport",
+    email: "cai@concord4catering.com",
+    emailHref: "mailto:cai@concord4catering.com",
+  },
+  {
+    name: "Alexandria Branch",
+    code: "HBE",
+    airport: "Borg El Arab Airport",
+    email: "hbe@concord4catering.com",
+    emailHref: "mailto:hbe@concord4catering.com",
+  },
+  {
+    name: "Hurghada Branch",
+    code: "HRG",
+    airport: "Hurghada International Airport",
+    email: "hrg@concord4catering.com",
+    emailHref: "mailto:hrg@concord4catering.com",
+  },
+];
+
+// Organization structured data (JSON-LD) — rendered in app/layout.tsx.
+export const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteConfig.name,
+  url: siteConfig.domain,
+  logo: `${siteConfig.domain}/logo/concord-logo.png`,
+  telephone: "+201069985399",
+  email: siteConfig.email,
+  foundingDate: String(siteConfig.founded),
+  areaServed: "EG",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "00:00",
+    closes: "23:59",
+  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      telephone: "+201069985399",
+      email: siteConfig.email,
+      areaServed: "EG",
+      availableLanguage: ["en", "ar"],
+    },
+    ...branches.map((b) => ({
+      "@type": "ContactPoint",
+      contactType: `${b.name} (${b.code})`,
+      email: b.email,
+      areaServed: "EG",
+    })),
   ],
 };
 

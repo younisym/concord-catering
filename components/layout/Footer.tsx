@@ -70,16 +70,20 @@ export default function Footer() {
             </h4>
             <ul className="mt-5 space-y-3 text-sm text-white/75">
               <li className="flex items-start gap-2.5">
+                <Clock className="size-4 mt-0.5 text-red shrink-0" />
+                Available 24/7
+              </li>
+              <li className="flex items-start gap-2.5">
                 <Phone className="size-4 mt-0.5 text-red shrink-0" />
-                {siteConfig.phones[0]}
+                <a href={siteConfig.phoneHref} className="hover:text-white transition-colors">
+                  {siteConfig.phone}
+                </a>
               </li>
               <li className="flex items-start gap-2.5">
                 <Mail className="size-4 mt-0.5 text-red shrink-0" />
-                {siteConfig.email}
-              </li>
-              <li className="flex items-start gap-2.5">
-                <Clock className="size-4 mt-0.5 text-red shrink-0" />
-                {siteConfig.hours.days}, {siteConfig.hours.time}
+                <a href={siteConfig.emailHref} className="hover:text-white transition-colors">
+                  {siteConfig.email}
+                </a>
               </li>
             </ul>
           </div>

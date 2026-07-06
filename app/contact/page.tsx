@@ -3,14 +3,14 @@ import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import PageHero from "@/components/ui/PageHero";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
-import LocationCard from "@/components/sections/LocationCard";
+import BranchCard from "@/components/sections/BranchCard";
 import ContactForm from "@/components/sections/ContactForm";
-import { siteConfig } from "@/lib/content";
+import { siteConfig, branches } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
-    "Get in touch with Concord for Catering for airline catering, event catering, or customized meal solutions across Obour, Borg El Arab, and Hurghada, Egypt.",
+    "Get in touch with Concord for Catering for airline catering, event catering, or customized meal solutions across Obour, Borg El Arab, and Hurghada, Egypt. Available 24/7.",
 };
 
 export default function ContactPage() {
@@ -19,7 +19,7 @@ export default function ContactPage() {
       <PageHero
         kicker="Contact Us"
         title="Let's build a reliable catering partnership."
-        description="Whether you're looking for airline catering, event catering, or customized meal solutions, our team is ready to assist you."
+        description="Whether you're looking for airline catering, event catering, or customized meal solutions, our team is ready to assist you — around the clock."
         image="/images/hero-premium-tray.jpg"
         imageAlt="Premium meal tray prepared by Concord for Catering"
       />
@@ -36,28 +36,34 @@ export default function ContactPage() {
 
               <div className="mt-10 space-y-5">
                 <div className="flex items-start gap-3">
+                  <Clock className="size-5 text-red mt-0.5 shrink-0" />
+                  <div>
+                    <div className="text-sm font-semibold text-navy">{siteConfig.hours.primary}</div>
+                    <div className="text-gray text-sm">{siteConfig.hours.secondary}</div>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
                   <Phone className="size-5 text-red mt-0.5 shrink-0" />
                   <div>
                     <div className="text-sm font-semibold text-navy">Phone</div>
-                    {siteConfig.phones.map((p) => (
-                      <div key={p} className="text-gray text-sm">{p}</div>
-                    ))}
+                    <a
+                      href={siteConfig.phoneHref}
+                      className="text-gray text-sm hover:text-red transition-colors"
+                    >
+                      {siteConfig.phone}
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Mail className="size-5 text-red mt-0.5 shrink-0" />
                   <div>
                     <div className="text-sm font-semibold text-navy">Email</div>
-                    <div className="text-gray text-sm">{siteConfig.email}</div>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Clock className="size-5 text-red mt-0.5 shrink-0" />
-                  <div>
-                    <div className="text-sm font-semibold text-navy">Business Hours</div>
-                    <div className="text-gray text-sm">
-                      {siteConfig.hours.days}, {siteConfig.hours.time}
-                    </div>
+                    <a
+                      href={siteConfig.emailHref}
+                      className="text-gray text-sm hover:text-red transition-colors"
+                    >
+                      {siteConfig.email}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -74,10 +80,14 @@ export default function ContactPage() {
 
       <section className="bg-gray-light py-24 sm:py-28">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <SectionHeading kicker="Our Locations" title="Find us across Egypt." />
+          <SectionHeading
+            kicker="Our Branches"
+            title="A dedicated contact at every airport we serve."
+            description="Reach the branch nearest to your operation directly."
+          />
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {siteConfig.locations.map((loc) => (
-              <LocationCard key={loc.name} {...loc} />
+            {branches.map((branch) => (
+              <BranchCard key={branch.code} {...branch} />
             ))}
           </div>
         </div>

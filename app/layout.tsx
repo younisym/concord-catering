@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { siteConfig, structuredData } from "@/lib/content";
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | Concord for Catering",
   },
   description:
-    "Concord for Catering delivers premium airline catering, corporate catering, and large-scale food production across Egypt — built on precision, food safety, and international standards since 2011.",
+    "Concord for Catering delivers premium airline catering, corporate catering, and large-scale food production across Egypt — built on precision, food safety, and international standards since 2011. Available 24/7, 365 days a year.",
   keywords: [
     "airline catering Egypt",
     "inflight catering",
@@ -25,12 +26,16 @@ export const metadata: Metadata = {
     "corporate catering Egypt",
     "Concord for Catering",
   ],
-  metadataBase: new URL("https://www.concordcatering.com"),
+  metadataBase: new URL(siteConfig.domain),
   openGraph: {
     title: "Concord for Catering | Premium Airline & Industrial Catering",
     description:
-      "Precision. Trust. International Standards. Premium airline catering and large-scale food production across Egypt since 2011.",
+      "Precision. Trust. International Standards. Premium airline catering and large-scale food production across Egypt since 2011. Available 24/7, 365 days a year.",
     type: "website",
+  },
+  other: {
+    "contact:phone_number": siteConfig.phone,
+    "contact:email": siteConfig.email,
   },
 };
 
@@ -42,6 +47,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${jakarta.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-white text-navy">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
